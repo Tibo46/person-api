@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace person_api.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,9 +27,8 @@ namespace person_api.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
-                    Group = table.Column<int>(nullable: false),
-                    CreationDate = table.Column<DateTime>(nullable: false, defaultValueSql: "getdate()"),
-                    GroupId = table.Column<int>(nullable: true)
+                    GroupId = table.Column<int>(nullable: false),
+                    CreationDate = table.Column<DateTime>(nullable: false, defaultValueSql: "getdate()")
                 },
                 constraints: table =>
                 {
@@ -39,7 +38,7 @@ namespace person_api.Migrations
                         column: x => x.GroupId,
                         principalTable: "Groups",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

@@ -10,8 +10,8 @@ using person_api.Database;
 namespace person_api.Migrations
 {
     [DbContext(typeof(PeopleContext))]
-    [Migration("20200409085719_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20200409090530_InitialMigrations")]
+    partial class InitialMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -52,10 +52,7 @@ namespace person_api.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getdate()");
 
-                    b.Property<int>("Group")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("GroupId")
+                    b.Property<int>("GroupId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -73,9 +70,11 @@ namespace person_api.Migrations
 
             modelBuilder.Entity("person_api.Models.Person", b =>
                 {
-                    b.HasOne("person_api.Models.Group", null)
+                    b.HasOne("person_api.Models.Group", "Group")
                         .WithMany("Persons")
-                        .HasForeignKey("GroupId");
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
