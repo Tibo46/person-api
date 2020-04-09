@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace person_api.Models
 {
@@ -14,6 +15,8 @@ namespace person_api.Models
         public string Name { get; set; }
 
         public int GroupId { get; set; }
+
+        [JsonIgnore]
         public Group Group { get; set; }
 
         public DateTime CreationDate { get; set; }
