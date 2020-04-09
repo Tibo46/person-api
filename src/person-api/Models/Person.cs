@@ -13,6 +13,9 @@ namespace person_api.Models
         [Required]
         public string Name { get; set; }
 
+        [Required]
+        public int Group { get; set; }
+
         public DateTime CreationDate { get; set; }
     }
 }

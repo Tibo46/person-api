@@ -21,8 +21,10 @@ namespace person_api.Migrations
 
             modelBuilder.Entity("person_api.Models.Group", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
@@ -48,15 +50,30 @@ namespace person_api.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getdate()");
 
+                    b.Property<int>("Group")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("GroupId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GroupId");
+
                     b.HasIndex("Name");
 
                     b.ToTable("Persons");
+                });
+
+            modelBuilder.Entity("person_api.Models.Person", b =>
+                {
+                    b.HasOne("person_api.Models.Group", null)
+                        .WithMany("Persons")
+                        .HasForeignKey("GroupId");
                 });
 #pragma warning restore 612, 618
         }
