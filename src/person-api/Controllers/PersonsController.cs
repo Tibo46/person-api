@@ -44,11 +44,18 @@ namespace person_api.Controllers
         [HttpPost]
         public async Task<ActionResult<Person>> Post([FromBody] Person person)
         {
-            var result = await _db.Persons.AddAsync(person);
+            try
+            {
+                var result = await _db.Persons.AddAsync(person);
 
-            await _db.SaveChangesAsync();
+                await _db.SaveChangesAsync();
 
-            return new OkObjectResult(result.Entity);
+                return new OkObjectResult(result.Entity);
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500);
+            }
         }
     }
 }

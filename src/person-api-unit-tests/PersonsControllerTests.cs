@@ -181,6 +181,78 @@ namespace person_api_unit_tests
             }
         }
 
+        [Fact]
+        public async void Post_Returns_Added_Person()
+        {
+            var options = new DbContextOptionsBuilder<PeopleContext>()
+                .UseInMemoryDatabase(databaseName: "db_with_data_5")
+                .Options;
+
+            using (var context = new PeopleContext(options))
+            {
+                context.Persons.AddRange(_allPersons);
+                context.Groups.AddRange(_allGroups);
+                context.SaveChanges();
+            }
+
+            using (var context = new PeopleContext(options))
+            {
+                var sut = new PersonsController(context);
+
+                var actionResult = await sut.Post(new Person
+                {
+                    Name = "Walter White",
+                    GroupId = 1,
+                });
+                Assert.IsType<OkObjectResult>(actionResult.Result);
+
+                var result = actionResult.Result as OkObjectResult;
+                var personResult = result.Value as Person;
+
+                Assert.Equal("Walter White", personResult.Name);
+                Assert.Equal(1, personResult.GroupId);
+
+                var newlyAddedPersonActionResult = await sut.Get(personResult.Id);
+                var newlyAddedPersonResult = newlyAddedPersonActionResult.Result as OkObjectResult;
+                var newlyAddedPerson = newlyAddedPersonResult.Value as Person;
+
+                Assert.Equal(newlyAddedPerson.Id, personResult.Id);
+                Assert.Equal(newlyAddedPerson.Name, personResult.Name);
+                Assert.Equal(newlyAddedPerson.GroupId, personResult.GroupId);
+            }
+        }
+
+        [Fact]
+        public async void Post_Returns_500_IfDuplicated()
+        {
+            var options = new DbContextOptionsBuilder<PeopleContext>()
+                .UseInMemoryDatabase(databaseName: "db_with_data_6")
+                .Options;
+
+            using (var context = new PeopleContext(options))
+            {
+                context.Persons.AddRange(_allPersons);
+                context.Groups.AddRange(_allGroups);
+                context.SaveChanges();
+            }
+
+            using (var context = new PeopleContext(options))
+            {
+                var sut = new PersonsController(context);
+
+                var actionResult = await sut.Post(new Person
+                {
+                    Id = "person-1",
+                    Name = "John Doe 1",
+                });
+                Assert.IsType<StatusCodeResult>(actionResult.Result);
+
+                var result = actionResult.Result as StatusCodeResult;
+
+                Assert.Equal(500, result.StatusCode);
+            }
+        }
+
         private List<Group> GenerateMockGroups()
         {
             return new List<Group>
