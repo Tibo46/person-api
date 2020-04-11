@@ -22,7 +22,7 @@ namespace person_api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Person>> Get([FromRoute] string id)
         {
-            var result = await _db.Persons.FirstOrDefaultAsync(x => x.Id == id);
+            var result = await _db.Persons.Include(x => x.Group).FirstOrDefaultAsync(x => x.Id == id);
 
             if (result == null)
                 return NotFound();

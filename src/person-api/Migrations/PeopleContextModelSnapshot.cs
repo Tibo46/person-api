@@ -126,7 +126,7 @@ namespace person_api.Migrations
             modelBuilder.Entity("person_api.Models.Person", b =>
                 {
                     b.HasOne("person_api.Models.Group", "Group")
-                        .WithMany("Persons")
+                        .WithMany()
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

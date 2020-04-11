@@ -17,7 +17,5 @@ namespace person_api.Models
 
         [JsonIgnore]
         public DateTime CreationDate { get; set; }
-
-        public List<Person> Persons { get; set; }
     }
 }

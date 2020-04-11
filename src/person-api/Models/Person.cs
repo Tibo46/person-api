@@ -16,7 +16,6 @@ namespace person_api.Models
 
         public int GroupId { get; set; }
 
-        [JsonIgnore]
         public Group Group { get; set; }
 
         public DateTime CreationDate { get; set; }
