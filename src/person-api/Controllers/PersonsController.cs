@@ -46,6 +46,11 @@ namespace person_api.Controllers
         {
             try
             {
+                if(string.IsNullOrWhiteSpace(person.Name) || person.GroupId == 0)
+                {
+                    return UnprocessableEntity();
+                }
+
                 var result = await _db.Persons.AddAsync(person);
 
                 await _db.SaveChangesAsync();
