@@ -6,12 +6,12 @@ The tests are using xUnit.
 Follow this readme to setup the project and run it from your machine.
 Note: this was only tested on a Windows machine, but it should work the same way on Mac.
 
-# PREREQUISITE
+## PREREQUISITE
 
 - [ASP.NET Core Runtime 3.1.x](https://dotnet.microsoft.com/download/dotnet-core/3.1)
 - [Docker](https://www.docker.com/products/docker-desktop) or [SSMS](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15)
 
-# DB SETUP
+## DB SETUP
 
 The DB can be setup in 3 different ways:
 
@@ -19,7 +19,7 @@ The DB can be setup in 3 different ways:
 - using your own SQL server and running the migrations
 - importing the included sql script into your own SQL server
 
-## Via Docker
+### Via Docker
 
 As an example password I am using "TestP@ssW0rd", don't forget to replace it with your desired strong password. You will also have to update it in appsettings.json
 
@@ -43,7 +43,7 @@ As an example password I am using "TestP@ssW0rd", don't forget to replace it wit
 - Open a terminal from <path to repository>/src/person-api
   `dotnet ef database update`
 
-## Using your own DB and migrations
+### Using your own DB and migrations
 
 If you do not want to use docker, you can run the migrations against your own database to create the tables
 
@@ -55,7 +55,7 @@ If you do not want to use docker, you can run the migrations against your own da
 - Open a terminal from <path to repository>/src/person-api
   `dotnet ef database update`
 
-## Using SQL script file
+### Using SQL script file
 
 If you do not want to use migrations, you can follow those steps to setup the DB using the provided SQL script.
 Note: You will need the latest version of SSMS installed to run the SQL script.
@@ -63,7 +63,7 @@ Note: You will need the latest version of SSMS installed to run the SQL script.
 - Import "PersonApiDb.sql" into your SqlServer
 - Change the connection string from appsettings.json to point to your SqlServer with your credentials
 
-# RUN THE PROJECT
+## RUN THE PROJECT
 
 - Open a terminal from <path to repository>/src/person-api
   `dotnet run`
