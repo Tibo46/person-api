@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "person-api", "src\person-api\person-api.csproj", "{5522FB02-9441-4601-B21A-612460E53222}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "person-api", "src\person-api.csproj", "{5522FB02-9441-4601-B21A-612460E53222}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "person-api-unit-tests", "src\person-api-unit-tests\person-api-unit-tests.csproj", "{77B1156C-F082-4E08-8B4A-9BFBD747FBD5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "person-api-unit-tests", "tests\person-api-unit-tests\person-api-unit-tests.csproj", "{77B1156C-F082-4E08-8B4A-9BFBD747FBD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

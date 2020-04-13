@@ -246,6 +246,7 @@ namespace person_api_unit_tests
                 {
                     Id = "person-1",
                     Name = "John Doe 1",
+                    GroupId = 1
                 });
                 Assert.IsType<StatusCodeResult>(actionResult.Result);
 

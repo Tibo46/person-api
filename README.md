@@ -9,6 +9,7 @@ Note: this was only tested on a Windows machine, but it should work the same way
 ## PREREQUISITE
 
 - [ASP.NET Core Runtime 3.1.x](https://dotnet.microsoft.com/download/dotnet-core/3.1)
+- dotnet ef installed globally: `dotnet tool install --global dotnet-ef`
 - [Docker](https://www.docker.com/products/docker-desktop) or [SSMS](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15)
 
 ## DB SETUP
@@ -22,6 +23,8 @@ The DB can be setup in 3 different ways:
 ### Via Docker
 
 As an example password I am using "TestP@ssW0rd", don't forget to replace it with your desired strong password. You will also have to update it in appsettings.json
+
+- Start Docker Desktop in your machine
 
 - Pull the SQL server image
   `docker pull mcr.microsoft.com/mssql/server:2019-CU3-ubuntu-18.04`
@@ -40,7 +43,7 @@ As an example password I am using "TestP@ssW0rd", don't forget to replace it wit
 
 - Close the terminal
 
-- Open a terminal from <path to repository>/src/person-api
+- Open a terminal from <path to repository>/src
   `dotnet ef database update`
 
 ### Using your own DB and migrations
@@ -48,11 +51,12 @@ As an example password I am using "TestP@ssW0rd", don't forget to replace it wit
 If you do not want to use docker, you can run the migrations against your own database to create the tables
 
 - In your favorite SQL management tool, create a new DB
+
   `CREATE DATABASE People GO`
 
 - Change the connection string from appsettings.json to point to your SqlServer with your credentials
 
-- Open a terminal from <path to repository>/src/person-api
+- Open a terminal from <path to repository>/src
   `dotnet ef database update`
 
 ### Using SQL script file
@@ -65,7 +69,7 @@ Note: You will need the latest version of SSMS installed to run the SQL script.
 
 ## RUN THE PROJECT
 
-- Open a terminal from <path to repository>/src/person-api
+- Open a terminal from <path to repository>/src
   `dotnet run`
   The API will be accessible in the following address: http://localhost:5000
   To test that the API is able to access the DB correctly, navigate to http://localhost:5000/status/health you should see "Healthy"
