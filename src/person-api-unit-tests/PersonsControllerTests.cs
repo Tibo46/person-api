@@ -219,6 +219,8 @@ namespace person_api_unit_tests
                 Assert.Equal(newlyAddedPerson.Id, personResult.Id);
                 Assert.Equal(newlyAddedPerson.Name, personResult.Name);
                 Assert.Equal(newlyAddedPerson.GroupId, personResult.GroupId);
+                Assert.Equal(newlyAddedPerson.Group.Id, personResult.Group.Id);
+                Assert.Equal(newlyAddedPerson.Group.Name, personResult.Group.Name);
             }
         }
 
